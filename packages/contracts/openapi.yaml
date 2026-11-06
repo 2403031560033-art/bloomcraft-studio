@@ -1,0 +1,164 @@
+openapi: 3.1.0
+info:
+  title: BloomCraft Studio API
+  version: 1.0.0
+  description: OpenAPI contract for BloomCraft Studio handmade-gifts e-commerce platform in Jhansi, India.
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development server
+paths:
+  /categories:
+    get:
+      summary: List active categories
+      responses:
+        '200':
+          description: List of categories
+    post:
+      summary: Create new category (Admin)
+      responses:
+        '201':
+          description: Category created
+  /products:
+    get:
+      summary: Public product catalogue with filters
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: availability
+          in: query
+          schema:
+            type: string
+            enum: [READY_STOCK, MADE_TO_ORDER, CUSTOM_ONLY]
+      responses:
+        '200':
+          description: Catalogue products
+    post:
+      summary: Create product (Admin)
+      responses:
+        '201':
+          description: Product created
+  /products/{slug}:
+    get:
+      summary: Get product details by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product details
+        '404':
+          description: Not found
+  /checkout:
+    post:
+      summary: Guest checkout with server price recalculation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerName, customerPhone, shippingAddress, items, paymentMethod]
+              properties:
+                customerName:
+                  type: string
+                customerPhone:
+                  type: string
+                paymentMethod:
+                  type: string
+                  enum: [ONLINE, COD]
+      responses:
+        '201':
+          description: Order created with payment reference
+  /orders/track:
+    get:
+      summary: Safe public order tracking
+      parameters:
+        - name: orderNumber
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: phone
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sanitized tracking timeline
+  /custom-order-requests:
+    post:
+      summary: Submit custom order inquiry
+      responses:
+        '201':
+          description: Request logged
+  /admin/auth/login:
+    post:
+      summary: Admin session login
+      responses:
+        '200':
+          description: Cookie session established
+  /admin/orders:
+    get:
+      summary: Admin orders list
+      responses:
+        '200':
+          description: Orders list
+    post:
+      summary: Record manual Instagram/WhatsApp DM order
+      responses:
+        '201':
+          description: Manual order recorded
+  /admin/orders/{id}:
+    patch:
+      summary: Validate state transition and update order
+      responses:
+        '200':
+          description: Order updated
+  /admin/reports/orders.csv:
+    get:
+      summary: Export all orders to CSV
+      responses:
+        '200':
+          description: CSV file stream
+  /auth/register:
+    post:
+      summary: Customer patron account registration
+      responses:
+        '201':
+          description: Customer account registered and cookie established
+  /auth/login:
+    post:
+      summary: Customer patron login
+      responses:
+        '200':
+          description: Customer cookie session established
+  /auth/logout:
+    post:
+      summary: Customer logout
+      responses:
+        '200':
+          description: Customer session cleared
+  /auth/me:
+    get:
+      summary: Check current authenticated session (Customer or Admin)
+      responses:
+        '200':
+          description: Session identity
+  /customer/orders:
+    get:
+      summary: Fetch patron order history
+      responses:
+        '200':
+          description: List of customer orders
+
+

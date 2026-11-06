@@ -1,0 +1,28 @@
+You are a senior product strategist, UX designer, solution architect, database architect, API designer and staff full-stack engineer. Build BloomCraft Studio, a real handmade-gifts e-commerce platform—not a generic shop template.
+
+BUSINESS CONTEXT
+Instagram: @bloomcraftstudio_. Profile name appears as Soni; location shown Jhansi, India. Screenshots show handmade bouquets, crochet/flower keychains, flower pots, floral hair accessories/clips, torans/wall hangings, festive decor and personalised gifts. Instagram is currently the discovery and DM-order channel. Treat screenshots as product/brand reference only. Exact prices, inventory, shipping, policies, lead times, payment methods and genuine reviews are unknown; create editable placeholders and never fabricate them.
+
+OUTCOME
+Create responsive storefront + secure owner/admin dashboard. Customers browse, customise, submit custom requests, checkout and track. Owner manages products, images, categories, variants, stock/capacity, custom requests, quotes, orders, payments, fulfilment and manual Instagram/WhatsApp orders.
+
+DESIGN
+Warm handmade elegance; mobile-first. Palette: #43243F, #704568, #A64D78, #F6E4EC, #EEE9F7, #FFFBF8, text #261F26. Headings DM Serif Display/Playfair Display; UI Inter/DM Sans. Use rounded cards, soft borders, subtle shadows, restrained botanical accents. Product images must dominate. Hero: “Little things, made with love.” CTAs: Shop the collection / Create a custom gift. Categories: Bouquets, Flower Pots, Keychains, Toran & Wall Hangings, Hair Accessories, Custom Gifts.
+
+CUSTOMER PAGES
+Home; shop/category with search/filter/sort; product detail with gallery, owner-set price, variants, personalisation, fulfilment status and prep estimate; cart; guest checkout with Indian address/PIN; confirmation and safe tracking; custom-order form (occasion, budget, colours, description, required date, optional inspiration image, contact); About, Contact, FAQ, Shipping, Returns, Privacy, Terms. Clearly state custom request is not confirmed until owner approves quote/lead time.
+
+ADMIN
+Secure login/RBAC; dashboard queues; product/category CRUD; images; variants; price; stock/capacity; custom request inbox/assignment/notes/quote/status/conversion; orders with source (website/Instagram/WhatsApp/manual), customer, item snapshots, payment status, fulfilment timeline and tracking; manual order entry; basic reports/CSV.
+
+RULES
+Fulfilment types READY_STOCK, MADE_TO_ORDER, CUSTOM_ONLY. Server recalculates price/shipping; ignore client totals. Store immutable order item snapshots. Payment and fulfilment states are separate. Verify payment server-side via signed webhooks and idempotency; never trust redirect. COD/manual methods hidden until configured. Prevent overselling transactionally. Validate transitions and audit them. Public tracking exposes no internal notes or other customers' data. Never invent reviews, rates, credentials or policies.
+
+TECH
+Prefer Next.js App Router + TypeScript, Tailwind, PostgreSQL + Prisma/Drizzle, secure server-side routes, managed object storage, provider adapter for payment (Razorpay only after merchant onboarding). API `/api/v1`, OpenAPI 3.1, UUIDs, UTC timestamps, INR integer paise, Zod validation, migrations, tests, `.env.example`, README. Modular monolith; no microservices for MVP.
+
+REQUIRED FILES
+docs/PRD.md; docs/TDD.md; docs/DATA_DICTIONARY.md; docs/API_SPEC.md; docs/UI_UX_DESIGN_SYSTEM.md; packages/database/schema.sql or ORM schema; packages/contracts/openapi.yaml; working storefront/admin; demo seed data clearly labelled; automated tests; README.
+
+EXECUTION
+First inspect repository and report existing state. Do not overwrite working code blindly. Produce gap analysis, then docs, architecture, implementation plan. Implement foundation → catalogue → cart/checkout → custom requests → admin → payment integration → QA. Keep docs and code aligned. Use TODO/config placeholders for unknown business facts. Do not claim features are done unless implemented and tested. Finish with a traceability matrix DONE/PARTIAL/NOT DONE and list the business-owner decisions still needed.
