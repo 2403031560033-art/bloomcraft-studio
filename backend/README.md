@@ -73,3 +73,4 @@ The server will start at `http://localhost:5000`.
 | `PATCH` | `/api/v1/admin/orders/:id` | Order status transition |
 | `GET` | `/api/v1/admin/reports/summary` | KPI overview metrics |
 | `GET` | `/api/v1/admin/reports/orders.csv` | Orders CSV export |
+

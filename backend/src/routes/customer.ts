@@ -26,3 +26,4 @@ router.get('/orders', verifyCustomerAuth, async (req: AuthenticatedRequest, res:
 });
 
 export default router;
+

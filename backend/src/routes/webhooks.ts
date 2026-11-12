@@ -54,3 +54,4 @@ router.post('/payments/:provider', async (req: Request, res: Response) => {
 });
 
 export default router;
+

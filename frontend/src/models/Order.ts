@@ -163,7 +163,6 @@ const OrderSchema = new Schema<IOrder>(
 
 OrderSchema.index({ orderStatus: 1, createdAt: -1 });
 OrderSchema.index({ createdAt: -1 });
-OrderSchema.index({ orderNumber: 1 });
 OrderSchema.index({ customerPhoneSnapshot: 1 });
 
 const Order: Model<IOrder> =

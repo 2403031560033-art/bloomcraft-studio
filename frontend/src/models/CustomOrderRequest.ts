@@ -66,7 +66,6 @@ const CustomOrderRequestSchema = new Schema<ICustomOrderRequest>(
 );
 
 CustomOrderRequestSchema.index({ status: 1, createdAt: -1 });
-CustomOrderRequestSchema.index({ requestNumber: 1 });
 
 const CustomOrderRequest: Model<ICustomOrderRequest> =
   mongoose.models.CustomOrderRequest ||
