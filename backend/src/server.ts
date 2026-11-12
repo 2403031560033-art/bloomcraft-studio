@@ -24,7 +24,18 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 app.use(
   cors({
-    origin: [CLIENT_URL, 'http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (
+        origin === CLIENT_URL ||
+        origin.endsWith('.vercel.app') ||
+        origin === 'http://localhost:3000' ||
+        origin === 'http://127.0.0.1:3000'
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   })
 );

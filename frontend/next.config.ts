@@ -25,6 +25,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (backendUrl) {
+      return {
+        beforeFiles: [
+          {
+            source: "/api/v1/:path*",
+            destination: `${backendUrl.replace(/\/$/, "")}/api/v1/:path*`,
+          },
+        ],
+      };
+    }
+    return [];
+  },
 };
 
 export default nextConfig;
